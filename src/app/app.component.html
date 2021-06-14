@@ -1,0 +1,47 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#" (click)="cambia ('rent')">Noleggia
+                            Film</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" (click)="cambia ('list')">Lista dei film</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <button type="button" class="btn btn-primary" (click)="cambia('list')">Film Usciti</button>
+        <button type="button" class="btn btn-primary" (click)="cambia('rent')">Costo Film</button>
+    </div>
+
+    <div [ngSwitch]='selected'>
+        <div *ngSwitchCase="'list'">
+            <app-movie-list [movielist]="movies" (showmovie)="vediInfo($event)" (editmovie)=editDetail($event)>
+            </app-movie-list>
+        </div>
+        <div *ngSwitchCase="'detail'">
+            <app-movie-detail [movie]=selectedmovie></app-movie-detail>
+        </div>
+        <div *ngSwitchCase="'edit'">
+            <app-edit-movie [movie]=selectedmovie (movieupdated)="updateMovie($event)"></app-edit-movie>
+        </div>
+        <div *ngSwitchDefault>
+            <app-rent-movie></app-rent-movie>
+        </div>
+    </div>
+</main>
+<footer></footer>
